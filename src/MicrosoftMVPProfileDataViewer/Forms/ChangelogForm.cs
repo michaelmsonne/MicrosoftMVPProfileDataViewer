@@ -19,7 +19,7 @@ namespace MVPProfileDataViewer.Forms
         private void PopulateChangelog()
         {
             // Changelog content
-            var changelogContent = "Version 1.0 (01-09-2024):\n" +
+            var changelogContent = "Version 1.0.0.0 (01-09-2024):\n" +
                                    "- First release";
 
             // Set the content in the RichTextBox control
