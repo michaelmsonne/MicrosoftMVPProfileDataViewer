@@ -1,6 +1,2 @@
-## [1.0.0.0] - XX-XX-XXXX
-Added:
-  -  ..
-
-Updates:
-  - ..
+## [1.0.0.0] - 01-09-2024
+First release
