@@ -32,6 +32,7 @@ namespace MVPProfileDataViewer.Forms
         
         private void EnableDoubleBuffering(DataGridView dgv)
         {
+            // Enable double buffering for the data grid view to reduce flickering
             typeof(DataGridView).InvokeMember("DoubleBuffered",
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.SetProperty,
                 null, dgv, new object[] { true });
@@ -136,20 +137,24 @@ namespace MVPProfileDataViewer.Forms
                             // Update the activity type and technology focus area counts
                             if (_activityTypeCounts.ContainsKey(activityType))
                             {
+                                // Increment the activity type count
                                 _activityTypeCounts[activityType]++;
                             }
                             else
                             {
+                                // Add the activity type to the dictionary
                                 _activityTypeCounts[activityType] = 1;
                             }
 
                             // Update the technology focus area counts
                             if (_technologyFocusAreaCounts.ContainsKey(technologyFocusArea))
                             {
+                                // Increment the technology focus area count
                                 _technologyFocusAreaCounts[technologyFocusArea]++;
                             }
                             else
                             {
+                                // Add the technology focus area to the dictionary
                                 _technologyFocusAreaCounts[technologyFocusArea] = 1;
                             }
                         }
@@ -164,16 +169,18 @@ namespace MVPProfileDataViewer.Forms
                             // Display the activity count
                             toolStripStatusLabelActivityCount.Text = $@"Activity Count: {_activities.Count}";
 
-                            // Show a message box with the activity type and technology focus area counts
+                            // Construct the activity type and technology focus area count messages
                             var activityTypeCountMessage = "Activity Type Counts:" + Environment.NewLine;
                             activityTypeCountMessage = _activityTypeCounts.Aggregate(activityTypeCountMessage,
                                 (current, kvp) => current + ($"{kvp.Key}: {kvp.Value}" + Environment.NewLine));
 
+                            // Construct the technology focus area count message
                             var technologyFocusAreaCountMessage = "Technology Focus Area Counts:" + Environment.NewLine;
                             technologyFocusAreaCountMessage = _technologyFocusAreaCounts.Aggregate(
                                 technologyFocusAreaCountMessage,
                                 (current, kvp) => current + ($"{kvp.Key}: {kvp.Value}" + Environment.NewLine));
 
+                            // Show a message box with the activity type and technology focus area counts
                             MessageBox.Show(
                                 activityTypeCountMessage + Environment.NewLine + technologyFocusAreaCountMessage,
                                 @"Activity and Technology Focus Area Counts", MessageBoxButtons.OK,
@@ -205,17 +212,21 @@ namespace MVPProfileDataViewer.Forms
 
         private void BtnShowCounts_Click(object sender, EventArgs e)
         {
+            // Check if activities were found (show menu if selected manually)
             if (_activities != null && _activities.Count > 0)
             {
+                // Construct the activity type and technology focus area count messages
                 var activityTypeCountMessage = "Activity Type Counts:" + Environment.NewLine;
                 activityTypeCountMessage = _activityTypeCounts.Aggregate(activityTypeCountMessage,
                     (current, kvp) => current + ($"{kvp.Key}: {kvp.Value}" + Environment.NewLine));
 
+                // Construct the technology focus area count message
                 var technologyFocusAreaCountMessage = "Technology Focus Area Counts:" + Environment.NewLine;
                 technologyFocusAreaCountMessage = _technologyFocusAreaCounts.Aggregate(
                     technologyFocusAreaCountMessage,
                     (current, kvp) => current + ($"{kvp.Key}: {kvp.Value}" + Environment.NewLine));
 
+                // Show a message box with the activity type and technology focus area counts
                 MessageBox.Show(
                     activityTypeCountMessage + Environment.NewLine + technologyFocusAreaCountMessage,
                     @"Activity and Technology Focus Area Counts", MessageBoxButtons.OK,
@@ -223,6 +234,7 @@ namespace MVPProfileDataViewer.Forms
             }
             else
             {
+                // Show a message box if no activities were found (loaded from JSON file)
                 MessageBox.Show(@"No activities found.", @"Information", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -271,7 +283,6 @@ namespace MVPProfileDataViewer.Forms
             {
                 changelogForm.ShowDialog();
             }
-
         }
 
         private void exportToCSVToolStripMenuItem_Click(object sender, EventArgs e)
